@@ -40,7 +40,7 @@ def left(i):
     :return: the index of the given node's left child
     :rtype: int
         """
-    pass
+    return (i * 2) + 1
 
 def right(i):
     """
@@ -55,7 +55,7 @@ def right(i):
     :return: the index of the given node's right child
     :rtype: int
     """
-    pass
+    return (i * 2) + 2
 
 def parent(i):
     """
@@ -70,7 +70,7 @@ def parent(i):
     :return: the index of the given node's parent
     :rtype: int
     """
-    pass
+    return math.floor(((i - 1)/2))
 
 def max_heapify(A,i):
     """
@@ -83,7 +83,19 @@ def max_heapify(A,i):
     :type A: heapsort_skeleton.HeapCapable
     :type i: int
     """
-    pass
+    l = left(i)
+    r = right(i)
+    if l <= A.heap_size - 1 and A[l] > A[i]:
+        largest = l
+    else:
+        largest = i
+    
+    if r <= A.heap_size - 1 and A[r] > A[largest]:
+        largest = r
+
+    if largest != i:
+        A[i], A[largest] = A[largest], A[i]
+        max_heapify(A,largest)
 
 def build_max_heap(A):
     """ Build a max-heap, from an unsorted array. 
@@ -93,7 +105,10 @@ def build_max_heap(A):
     :param A: the array to be sorted.
     :type A: heapsort_skeleton.HeapCapable
     """
-    pass
+    A.heap_size = len(A)
+
+    for i in range((len(A)), -1, -1):
+        max_heapify(A,i)
 
 
 def HeapSort(A):
@@ -104,7 +119,14 @@ def HeapSort(A):
     :param A: an array, with values in random order - do not assume that the array is already a max-heap! The `build_max_heap` procedure needs to be run on A before the actual sorting takes place.
     :type A: heapsort_skeleton.HeapCapable
     """
-    pass
+    build_max_heap(A)
+
+    for i in range(len(A)-1, -1, -1):
+        A[0], A[i] = A[i], A[0]
+
+        A.heap_size = A.heap_size - 1
+
+        max_heapify(A,0)
 
 
 

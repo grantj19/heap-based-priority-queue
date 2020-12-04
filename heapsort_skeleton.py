@@ -243,6 +243,14 @@ class testHeapSort(unittest.TestCase):
         HeapSort(A)
         self.assertEqual(A, [7])
 
+    def test_heap_max(self):
+        A = HeapCapable([7, 16, 7, 4, 8, 13, 18, 3, 10, 7, 12, 8, 17, 3])
+
+        max = heap_max(A)
+
+        self.assertEqual(max, A[0])
+
+
 
 
 

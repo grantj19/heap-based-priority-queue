@@ -113,6 +113,16 @@ def build_max_heap(A):
 def heap_max(A):
     return A[0]
 
+def heap_extract_max(A):
+    if A.heap_size < 1:
+        #throw heap underflow
+        raise ValueError("Heap Underflow")
+    max = A[0]
+    A[0] = A[A.heap_size]
+    A.heap_size = A.heap_size - 1
+    max_heapify(A, 0)
+    return max
+
 
 def HeapSort(A):
     """ Sort the array in place.

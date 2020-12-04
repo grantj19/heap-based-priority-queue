@@ -110,6 +110,9 @@ def build_max_heap(A):
     for i in range((len(A)), -1, -1):
         max_heapify(A,i)
 
+def heap_max(A):
+    return A[0]
+
 
 def HeapSort(A):
     """ Sort the array in place.

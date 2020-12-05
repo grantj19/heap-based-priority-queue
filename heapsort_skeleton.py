@@ -123,6 +123,14 @@ def heap_extract_max(A):
     max_heapify(A, 0)
     return max
 
+def heap_increase_key(A,i,key):
+    if key < A[i]:
+        raise ValueError("New key is smaller than current value")
+    A[i] = key
+    while i > 1 and A[parent(i)] < A[i]:
+        A[i], A[parent(i)] = A[parent(i)], A[i]
+        i = parent(i)
+
 
 def HeapSort(A):
     """ Sort the array in place.

@@ -118,7 +118,7 @@ def heap_extract_max(A):
         #throw heap underflow
         raise ValueError("Heap Underflow")
     max = A[0]
-    A[0] = A[A.heap_size]
+    A[0], A[A.heap_size - 1] = A[A.heap_size - 1], A[0]
     A.heap_size = A.heap_size - 1
     max_heapify(A, 0)
     return max
@@ -255,10 +255,13 @@ class testHeapSort(unittest.TestCase):
 
     def test_heap_max(self):
         A = HeapCapable([7, 16, 7, 4, 8, 13, 18, 3, 10, 7, 12, 8, 17, 3])
-
         max = heap_max(A)
-
         self.assertEqual(max, A[0])
+
+    def test_heap_extract_max(self):
+        A = HeapCapable([7, 16, 7, 4, 8, 13, 18, 3, 10, 7, 12, 8, 17, 3])
+        extracted_max = heap_extract_max(A)
+        self.assertEqual(extracted_max, 7)
 
 
 

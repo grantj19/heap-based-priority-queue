@@ -271,6 +271,13 @@ class testHeapSort(unittest.TestCase):
         extracted_max = heap_extract_max(A)
         self.assertEqual(extracted_max, 7)
 
+    #Add this later
+    '''
+    def test_heap_increase_key(self):
+        A = HeapCapable([7, 16, 7, 4, 8, 13, 18, 3, 10, 7, 12, 8, 17, 3])
+        increased_key = heap_increase_key(A, 3, 4)
+    '''
+
 
 
 

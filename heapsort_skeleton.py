@@ -131,6 +131,12 @@ def heap_increase_key(A,i,key):
         A[i], A[parent(i)] = A[parent(i)], A[i]
         i = parent(i)
 
+def max_heap_insert(A, key):
+    A.heap_size += 1
+    A[A.heap_size] = -1 #I set this to -1 to represent the bottom of the array. Could be wrong.
+    heap_increase_key(A, A.heap_size, key)
+
+
 
 def HeapSort(A):
     """ Sort the array in place.

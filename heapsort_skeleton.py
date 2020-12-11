@@ -132,9 +132,9 @@ def heap_increase_key(A,i,key):
         i = parent(i)
 
 def max_heap_insert(A, key):
-    A.heap_size += 1
-    A[A.heap_size] = A[-1] #I set this to -1 to represent the bottom of the array. Could be wrong.
-    heap_increase_key(A, A.heap_size, key)
+    A.heap_size = A.heap_size + 1
+    A.append(-1)
+    heap_increase_key(A, A.heap_size - 1, key)
 
 
 
@@ -282,6 +282,16 @@ class testHeapSort(unittest.TestCase):
         A = HeapCapable([17, 16, 3, 7, 13, 10, 1, 5, 0, 12, 4, 8, 9, 0])
         heap_increase_key(A, 8, 20)
         self.assertEqual(A, [20, 17, 3, 16, 13, 10, 1, 5, 7, 12, 4, 8, 9, 0])
+
+    def test_heap_insert_key(self):
+        A = HeapCapable([17, 16, 3, 7, 13, 10, 1, 5, 0, 12, 4, 8, 9, 0])
+        max_heap_insert(A, 15)
+        self.assertEqual(A, [17, 16, 15, 7, 13, 10, 3, 5, 0, 12, 4, 8, 9, 0, 1])
+
+    def test_heap_insert_key_max(self):
+        A = HeapCapable([17, 16, 3, 7, 13, 10, 1, 5, 0, 12, 4, 8, 9, 0])
+        max_heap_insert(A, 24)
+        self.assertEqual(A, [24, 16, 17, 7, 13, 10, 3, 5, 0, 12, 4, 8, 9, 0, 1])
 
 
 

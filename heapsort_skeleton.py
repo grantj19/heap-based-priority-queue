@@ -118,7 +118,8 @@ def heap_extract_max(A):
         #throw heap underflow
         raise ValueError("Heap Underflow")
     max = A[0]
-    A[0], A[A.heap_size - 1] = A[A.heap_size - 1], A[0]
+    A[0] = A[A.heap_size - 1]
+    #A[0], A[A.heap_size - 1] = A[A.heap_size - 1], A[0]
     A.heap_size = A.heap_size - 1
     max_heapify(A, 0)
     return max
@@ -133,7 +134,7 @@ def heap_increase_key(A,i,key):
 
 def max_heap_insert(A, key):
     A.heap_size += 1
-    A[A.heap_size] = -1 #I set this to -1 to represent the bottom of the array. Could be wrong.
+    A[A.heap_size] = A[-1] #I set this to -1 to represent the bottom of the array. Could be wrong.
     heap_increase_key(A, A.heap_size, key)
 
 
@@ -273,9 +274,9 @@ class testHeapSort(unittest.TestCase):
         self.assertEqual(max, A[0])
 
     def test_heap_extract_max(self):
-        A = HeapCapable([7, 16, 7, 4, 8, 13, 18, 3, 10, 7, 12, 8, 17, 3])
+        A = HeapCapable([ 27, 17, 3, 16, 13, 10, 1, 5, 7, 12, 4, 8, 9, 0 ])
         extracted_max = heap_extract_max(A)
-        self.assertEqual(extracted_max, 7)
+        self.assertEqual(extracted_max, 27)
 
     #Add this later
     '''

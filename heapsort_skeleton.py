@@ -110,6 +110,33 @@ def build_max_heap(A):
     for i in range((len(A)), -1, -1):
         max_heapify(A,i)
 
+def heap_max(A):
+    return A[0]
+
+def heap_extract_max(A):
+    if A.heap_size < 1:
+        #throw heap underflow
+        raise ValueError("Heap Underflow")
+    max = A[0]
+    A[0] = A[A.heap_size - 1]
+    A.heap_size = A.heap_size - 1
+    max_heapify(A, 0)
+    return max
+
+def heap_increase_key(A,i,key):
+    if key < A[i]:
+        raise ValueError("New key is smaller than current value")
+    A[i] = key
+    while i > 0 and A[parent(i)] < A[i]:
+        A[i], A[parent(i)] = A[parent(i)], A[i]
+        i = parent(i)
+
+def max_heap_insert(A, key):
+    A.heap_size = A.heap_size + 1
+    A.append(-1)
+    heap_increase_key(A, A.heap_size - 1, key)
+
+
 
 def HeapSort(A):
     """ Sort the array in place.
@@ -239,6 +266,33 @@ class testHeapSort(unittest.TestCase):
         A = HeapCapable([7])
         HeapSort(A)
         self.assertEqual(A, [7])
+
+    def test_heap_max(self):
+        A = HeapCapable([7, 16, 7, 4, 8, 13, 18, 3, 10, 7, 12, 8, 17, 3])
+        max = heap_max(A)
+        self.assertEqual(max, A[0])
+
+    def test_heap_extract_max(self):
+        A = HeapCapable([ 27, 17, 3, 16, 13, 10, 1, 5, 7, 12, 4, 8, 9, 0 ])
+        extracted_max = heap_extract_max(A)
+        self.assertEqual(extracted_max, 27)
+
+    #Add this later
+    def test_heap_increase_key(self):
+        A = HeapCapable([17, 16, 3, 7, 13, 10, 1, 5, 0, 12, 4, 8, 9, 0])
+        heap_increase_key(A, 8, 20)
+        self.assertEqual(A, [20, 17, 3, 16, 13, 10, 1, 5, 7, 12, 4, 8, 9, 0])
+
+    def test_heap_insert_key(self):
+        A = HeapCapable([17, 16, 3, 7, 13, 10, 1, 5, 0, 12, 4, 8, 9, 0])
+        max_heap_insert(A, 15)
+        self.assertEqual(A, [17, 16, 15, 7, 13, 10, 3, 5, 0, 12, 4, 8, 9, 0, 1])
+
+    def test_heap_insert_key_max(self):
+        A = HeapCapable([17, 16, 3, 7, 13, 10, 1, 5, 0, 12, 4, 8, 9, 0])
+        max_heap_insert(A, 24)
+        self.assertEqual(A, [24, 16, 17, 7, 13, 10, 3, 5, 0, 12, 4, 8, 9, 0, 1])
+
 
 
 

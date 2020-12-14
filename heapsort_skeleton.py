@@ -277,11 +277,25 @@ class testHeapSort(unittest.TestCase):
         extracted_max = heap_extract_max(A)
         self.assertEqual(extracted_max, 27)
 
-    #Add this later
     def test_heap_increase_key(self):
         A = HeapCapable([17, 16, 3, 7, 13, 10, 1, 5, 0, 12, 4, 8, 9, 0])
         heap_increase_key(A, 8, 20)
         self.assertEqual(A, [20, 17, 3, 16, 13, 10, 1, 5, 7, 12, 4, 8, 9, 0])
+
+    def test_heap_increase_key_high(self):
+        A = HeapCapable([17, 16, 3, 7, 13, 10, 1, 5, 0, 12, 4, 8, 9, 0])
+        heap_increase_key(A, 8, 900)
+        self.assertEqual(A, [900, 17, 3, 16, 13, 10, 1, 5, 7, 12, 4, 8, 9, 0])
+
+    def test_heap_increase_key_mid(self):
+        A = HeapCapable([17, 16, 3, 7, 13, 10, 1, 5, 0, 12, 4, 8, 9, 0])
+        heap_increase_key(A, 8, 10)
+        self.assertEqual(A, [17, 16, 3, 10, 13, 10, 1, 5, 7, 12, 4, 8, 9, 0])
+
+    def test_heap_insert_key_low(self):
+        A = HeapCapable([17, 16, 3, 7, 13, 10, 1, 5, 0, 12, 4, 8, 9, 0])
+        max_heap_insert(A, 0)
+        self.assertEqual(A, [17, 16, 3, 7, 13, 10, 1, 5, 0, 12, 4, 8, 9, 0, 0])
 
     def test_heap_insert_key(self):
         A = HeapCapable([17, 16, 3, 7, 13, 10, 1, 5, 0, 12, 4, 8, 9, 0])
